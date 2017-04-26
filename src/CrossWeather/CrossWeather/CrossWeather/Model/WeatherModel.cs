@@ -10,7 +10,7 @@ namespace CrossWeather.Model
     {
         public Weather weather { get; set; }
         public Common common { get; set; }
-        public WeatherResult result { get; set; }
+        public Result result { get; set; }
     }
 
     public class Weather
@@ -70,7 +70,7 @@ namespace CrossWeather.Model
         public string stormYn { get; set; }
     }
 
-    public class WeatherResult
+    public class Result
     {
         public int code { get; set; }
         public string requestUrl { get; set; }

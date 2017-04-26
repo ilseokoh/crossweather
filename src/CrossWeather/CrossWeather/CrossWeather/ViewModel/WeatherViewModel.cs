@@ -10,5 +10,6 @@ namespace CrossWeather.ViewModel
     public class WeatherViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
     }
 }

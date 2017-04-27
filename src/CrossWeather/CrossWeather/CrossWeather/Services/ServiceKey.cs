@@ -15,4 +15,9 @@ namespace CrossWeather.Services
         public const string ServiceAppKey = "7fada067-edbc-3d66-bf13-5252f117c684";
 
     }
+
+    public class AzureServiceKey
+    {
+        public static string AzureMobileAppURL = @"https://crossweather.azurewebsites.net";
+    }
 }

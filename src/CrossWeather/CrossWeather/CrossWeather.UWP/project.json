@@ -1,6 +1,11 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
+    "Plugin.Permissions": "1.2.1",
+    "Refractored.MvvmHelpers": "1.2.2",
+    "Xam.Plugin.Geolocator": "3.0.4",
+    "Xam.Plugins.Settings": "2.5.4",
+    "Xam.Plugins.TextToSpeech": "2.0.0",
     "Xamarin.Forms": "2.3.4.224"
   },
   "frameworks": {

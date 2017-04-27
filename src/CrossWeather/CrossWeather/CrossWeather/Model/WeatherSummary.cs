@@ -8,10 +8,15 @@ namespace CrossWeather.Model
 {
     public class WeatherSummary
     {
+        private string temp;
         /// <summary>
         /// 현재온도
         /// </summary>
-        public string Temperature { get; set; }
+        public string Temperature
+        {
+            get { return temp + "℃"; }
+            set { temp = value; }
+        }
         /// <summary>
         /// 위치 (City 구)
         /// </summary>
@@ -22,15 +27,26 @@ namespace CrossWeather.Model
         /// </summary>
         public string Description { get; set; }
 
+        private string iconUrl;
         /// <summary>
         /// 아이콘 URL 
         /// </summary>
-        public string IconUrl { get; set; }
+        public string IconUrl
+        {
+            get { return string.Format("http://www.weatherplanet.co.kr/images/common/ico/weather/ico_b_{0}.png", iconUrl.ToLower()); }
+            set { iconUrl = value; }
+        }
 
+        private string humidity;
         /// <summary>
         /// 습도
         /// </summary>
-        public string humidity { get; set; }
+        public string Humidity
+        {
+            get { return humidity + "%"; }
+            set { humidity = value; }
+        }
+
 
         /// <summary>
         /// 측정시각

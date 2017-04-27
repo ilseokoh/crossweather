@@ -1,12 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CrossWeather.Views.WeatherView"
+             x:Class="CrossWeather.Views.WeatherView" 
              Title="현재날씨">
-    <StackLayout Padding="10" Spacing="20">
-        <Label Text="{Binding WeatherSummary.Location}" FontSize="35"/>
-        <Label Text="{Binding WeatherSummary.Description}" FontSize="Medium"/>
-        <Label Text="{Binding WeatherSummary.Temperature}" FontSize="50"/>
+
+
+    <StackLayout Spacing="20" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+        <StackLayout.Padding>
+            <OnPlatform x:TypeArguments="Thickness"
+                iOS="0,20,0,0" Android="0" WinPhone="0" />
+        </StackLayout.Padding>
+        <Label Text="{Binding WeatherSummary.Location}" FontSize="35" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" MinimumHeightRequest="500"/>
+        <Image Source="{Binding WeatherSummary.IconUrl}" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center"/>
+        <Label Text="{Binding WeatherSummary.Description}" FontSize="Medium" HorizontalTextAlignment="Center"/>
+        <Label Text="{Binding WeatherSummary.Temperature}" FontSize="50" HorizontalTextAlignment="Center"/>
+
         <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
     </StackLayout>
+
+
+
 </ContentPage>

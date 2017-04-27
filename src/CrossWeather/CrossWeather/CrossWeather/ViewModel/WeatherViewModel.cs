@@ -6,9 +6,11 @@ using Plugin.Geolocator;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace CrossWeather.ViewModel
 {
@@ -26,14 +28,14 @@ namespace CrossWeather.ViewModel
             set { summary = value; OnPropertyChanged(); }
         }
 
-        ForecastModel forecast;
+        List<ForecastSummary> forecasts;
         /// <summary>
         /// 예보 정보 from 날씨 API 그대로
         /// </summary>
-        public ForecastModel Forecast
+        public List<ForecastSummary> Forecasts
         {
-            get { return forecast; }
-            set { forecast = value; OnPropertyChanged(); }
+            get { return forecasts; }
+            set { forecasts = value; OnPropertyChanged(); }
         }
 
         /// <summary>
@@ -97,7 +99,8 @@ namespace CrossWeather.ViewModel
                     var gps = await CrossGeolocator.Current.GetPositionAsync(10000);
                     weather = await WeatherService.GetWeather(gps.Latitude, gps.Longitude);
                     SetWeatherSummary(weather);
-                    forecast = await WeatherService.GetForecast(gps.Latitude, gps.Longitude);
+                    var forecast = await WeatherService.GetForecast(gps.Latitude, gps.Longitude);
+                    SetForecastSummary(forecast);
                 }
                 else
                 {
@@ -131,14 +134,38 @@ namespace CrossWeather.ViewModel
             WeatherSummary summary = new WeatherSummary
             {
                 Description = info.sky.name,
-                humidity = info.humidity + "%",
+                Humidity = info.humidity,
                 IconUrl = info.sky.code,
                 Location = city + " " + country,
                 ReleaseTime = info.timeRelease,
-                Temperature = info.temperature.tc + "℃"
+                Temperature = info.temperature.tc
             };
 
             this.WeatherSummary = summary;
+        }
+
+        private void SetForecastSummary(ForecastModel result)
+        {
+            var summary = new List<ForecastSummary>();
+            var item = result.weather.forecast6days[0];
+            if (item == null)
+            {
+                this.Forecasts = summary;
+                return;
+            }
+            var now = DateTime.Now;
+            // 와! 배열을 안쓰고 왜 이런거지 ... 
+            summary.Add(new ForecastSummary { Date = now.AddDays(1), DisplayIcon = item.sky.pmCode2day, Description = item.sky.pmName2day, DisplayTemp = item.temperature.tmin2day + " - " + item.temperature.tmax2day });
+            summary.Add(new ForecastSummary { Date = now.AddDays(2), DisplayIcon = item.sky.pmCode3day, Description = item.sky.pmName3day, DisplayTemp = item.temperature.tmin3day + " - " + item.temperature.tmax3day });
+            summary.Add(new ForecastSummary { Date = now.AddDays(3), DisplayIcon = item.sky.pmCode4day, Description = item.sky.pmName4day, DisplayTemp = item.temperature.tmin4day + " - " + item.temperature.tmax4day });
+            summary.Add(new ForecastSummary { Date = now.AddDays(4), DisplayIcon = item.sky.pmCode5day, Description = item.sky.pmName5day, DisplayTemp = item.temperature.tmin5day + " - " + item.temperature.tmax5day });
+            summary.Add(new ForecastSummary { Date = now.AddDays(5), DisplayIcon = item.sky.pmCode6day, Description = item.sky.pmName6day, DisplayTemp = item.temperature.tmin6day + " - " + item.temperature.tmax6day });
+            summary.Add(new ForecastSummary { Date = now.AddDays(6), DisplayIcon = item.sky.pmCode7day, Description = item.sky.pmName7day, DisplayTemp = item.temperature.tmin7day + " - " + item.temperature.tmax7day });
+            summary.Add(new ForecastSummary { Date = now.AddDays(7), DisplayIcon = item.sky.pmCode8day, Description = item.sky.pmName8day, DisplayTemp = item.temperature.tmin8day + " - " + item.temperature.tmax8day });
+            summary.Add(new ForecastSummary { Date = now.AddDays(8), DisplayIcon = item.sky.pmCode9day, Description = item.sky.pmName9day, DisplayTemp = item.temperature.tmin9day + " - " + item.temperature.tmax9day });
+            summary.Add(new ForecastSummary { Date = now.AddDays(9), DisplayIcon = item.sky.pmCode10day, Description = item.sky.pmName10day, DisplayTemp = item.temperature.tmin10day + " - " + item.temperature.tmax10day });
+
+            this.Forecasts = summary;
         }
 
         private async Task<bool> CheckPermissions()

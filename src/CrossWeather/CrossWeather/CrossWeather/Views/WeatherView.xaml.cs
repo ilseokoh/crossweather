@@ -15,6 +15,11 @@ namespace CrossWeather.Views
         public WeatherView()
         {
             InitializeComponent();
+
+            if (Device.RuntimePlatform == Device.iOS)
+                Icon = new FileImageSource { File = "tab1.png" };
+
+
         }
     }
 }

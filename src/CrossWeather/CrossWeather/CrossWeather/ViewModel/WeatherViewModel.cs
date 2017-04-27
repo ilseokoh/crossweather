@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
+using Plugin.TextToSpeech;
 
 namespace CrossWeather.ViewModel
 {
@@ -101,6 +102,13 @@ namespace CrossWeather.ViewModel
                     SetWeatherSummary(weather);
                     var forecast = await WeatherService.GetForecast(gps.Latitude, gps.Longitude);
                     SetForecastSummary(forecast);
+
+                    var speak = string.Format("현재 {0}의 날씨는 {1}입니다. 온도는 {2}이며, 습도는 {3}입니다.",
+                                                WeatherSummary.Location,
+                                                WeatherSummary.Description,
+                                                WeatherSummary.Temperature,
+                                                WeatherSummary.Humidity);
+                    CrossTextToSpeech.Current.Speak(speak);
                 }
                 else
                 {

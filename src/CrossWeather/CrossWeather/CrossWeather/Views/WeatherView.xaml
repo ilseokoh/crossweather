@@ -15,6 +15,9 @@
         <Label Text="{Binding WeatherSummary.Description}" FontSize="Medium" HorizontalTextAlignment="Center"/>
         <Label Text="{Binding WeatherSummary.Temperature}" FontSize="50" HorizontalTextAlignment="Center"/>
 
+        <Label Text="{Binding WeatherSummary.Humidity}" FontSize="Medium" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+        <Button Text="날씨 가져오기" Command="{Binding GetWeatherCommand}" />
+
         <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
     </StackLayout>
 

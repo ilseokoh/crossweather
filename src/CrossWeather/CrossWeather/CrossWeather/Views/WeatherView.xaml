@@ -2,6 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CrossWeather.Views.WeatherView"
-             Title="날씨">
-    <Label Text="날씨 페이지" />
+             Title="현재날씨">
+    <StackLayout Padding="10" Spacing="20">
+        <Label Text="{Binding WeatherSummary.Location}" FontSize="35"/>
+        <Label Text="{Binding WeatherSummary.Description}" FontSize="Medium"/>
+        <Label Text="{Binding WeatherSummary.Temperature}" FontSize="50"/>
+        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+    </StackLayout>
 </ContentPage>

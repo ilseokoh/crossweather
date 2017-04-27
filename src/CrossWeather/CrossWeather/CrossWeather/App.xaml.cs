@@ -14,6 +14,12 @@ namespace CrossWeather
             InitializeComponent();
 
             MainPage = new CrossWeather.MainPage();
+
+            var vm = new ViewModel.WeatherViewModel();
+            // 시작하면서 데이터 가져와서
+            vm.GetWeatherCommand.Execute(null);
+            // View Model 바인딩
+            MainPage.BindingContext = vm;
         }
 
         protected override void OnStart()

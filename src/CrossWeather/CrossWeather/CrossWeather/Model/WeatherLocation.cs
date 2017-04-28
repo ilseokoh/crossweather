@@ -10,7 +10,7 @@ namespace CrossWeather.Model
 {
     public class WeatherLocation 
     {
-        [JsonProperty("id")]
+        [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
         [Version]

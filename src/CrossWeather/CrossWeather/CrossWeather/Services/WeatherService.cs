@@ -14,7 +14,7 @@ namespace CrossWeather.Services
         const string WeatherCoordinatesUri = "http://apis.skplanetx.com/weather/current/hourly?version=1&lat={0}&lon={1}";
         const string WeatherCityUri = "http://apis.skplanetx.com/weather/current/hourly?version=1&city={0}&county={1}&village={2}";
         const string ForecastCoordinatesUri = "http://apis.skplanetx.com/weather/forecast/6days?version=1&lat={0}&lon={1}";
-        const string ForecastCityUri = "http://apis.skplanetx.com/weather/forecast?version=1&city={0}&county={1}&village={2}";
+        const string ForecastCityUri = "http://apis.skplanetx.com/weather/forecast/6days?version=1&city={0}&county={1}&village={2}";
 
 
         public async Task<WeatherModel> GetWeather(double latitude, double longitude)

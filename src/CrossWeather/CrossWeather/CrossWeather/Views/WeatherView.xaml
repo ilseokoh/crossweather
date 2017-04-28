@@ -18,6 +18,9 @@
         <Label Text="{Binding WeatherSummary.Humidity}" FontSize="Medium" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
         <Button Text="날씨 가져오기" Command="{Binding GetWeatherCommand}" />
 
+        <Button Text="관심지역으로 저장하기" Command="{Binding SaveLocationCommand}"/>
+        <Button Text="관심지역 가져오기" Command="{Binding GetLocationCommand}" />
+
         <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
     </StackLayout>
 

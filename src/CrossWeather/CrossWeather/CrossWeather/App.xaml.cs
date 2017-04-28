@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrossWeather.Model;
+using Plugin.Connectivity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +27,8 @@ namespace CrossWeather
         protected override void OnStart()
         {
             // Handle when your app starts
+
+
         }
 
         protected override void OnSleep()
